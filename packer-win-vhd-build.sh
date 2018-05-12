@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#cd packer_windows2016
-
 ls -al
 cd packer-templates
 ls -al
