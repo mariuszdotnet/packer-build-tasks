@@ -13,6 +13,6 @@ inputs:
   - name: packer-build-tasks
 
 run:
-  #path: ./pipeline-templates/terraform-init-plan-apply.sh
-  path: ls
-  args: [-al]
+  path: ./packer-build-tasks/packer-win-vhd-build.sh
+  #path: ls
+  #args: [-al]
