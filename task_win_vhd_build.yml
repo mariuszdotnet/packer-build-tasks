@@ -1,0 +1,18 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: 
+    repository: hashicorp/packer
+    tag: light
+
+inputs:
+  - name: secrets
+  - name: packer-templates
+  - name: packer-build-tasks
+
+run:
+  #path: ./pipeline-templates/terraform-init-plan-apply.sh
+  path: echo
+  args: [Hello World!]
