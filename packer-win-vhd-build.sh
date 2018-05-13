@@ -18,8 +18,10 @@ packer validate -var-file="variables.json" -var-file="packer-secrets.json" windo
 #echo 'start packer build'
 #packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
 
-#echo 'TEMP STUFF'
+echo 'TEMP STUFF'
 cd ../../
 git clone packer-build-tasks output-manifest
 cd output-manifest
+touch test.txt
+echo "Hello World!" > test.txt
 ls -al
