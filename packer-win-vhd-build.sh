@@ -18,15 +18,11 @@ packer validate -var-file="variables.json" -var-file="packer-secrets.json" windo
 #echo 'start packer build'
 #packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
 
-echo 'TEMP STUFF'
+echo 'Start pushing packer manifest file to output branch'
 cd ../../
 git clone packer-build-output output-manifest
 cd output-manifest
-#git checkout output
-touch test2.txt
-echo "Hello World!" > test.txt
 git config --global user.email "nobody@concourse-ci.org"
 git config --global user.name "Concourse"
 git add .
-git commit -m "Added test file"
-ls -al
+git commit -m "Published packer manifest file"
