@@ -1,11 +1,5 @@
 #!/bin/bash
 
-echo 'TEMP STUFF'
-git clone packer-build-tasks output-manifest
-cd output-manifest
-ls -al
-cd ..
-
 echo 'List root directory content'
 ls -al
 
@@ -25,5 +19,7 @@ packer validate -var-file="variables.json" -var-file="packer-secrets.json" windo
 #packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
 
 echo 'TEMP STUFF'
-cd ..
-ls -al
+git clone packer-build-tasks output-manifest
+#cd output-manifest
+#ls -al
+#cd ..
