@@ -22,8 +22,8 @@ echo 'TEMP STUFF'
 cd ../../
 git clone packer-build-output output-manifest
 cd output-manifest
-git checkout output
-touch test.txt
+#git checkout output
+touch test2.txt
 echo "Hello World!" > test.txt
 git config --global user.email "nobody@concourse-ci.org"
 git config --global user.name "Concourse"
