@@ -20,8 +20,9 @@ packer validate -var-file="variables.json" -var-file="packer-secrets.json" windo
 
 echo 'TEMP STUFF'
 cd ../../
-git clone packer-build-tasks output-manifest
+git clone packer-build-output output-manifest
 cd output-manifest
+git checkout output
 touch test.txt
 echo "Hello World!" > test.txt
 git config --global user.email "nobody@concourse-ci.org"
