@@ -11,7 +11,7 @@ inputs:
   - name: secrets
   - name: packer-templates
   - name: packer-build-tasks
-#  - name: packer-build-output
+  - name: packer-build-output
 
 outputs:
   - name: output-manifest
