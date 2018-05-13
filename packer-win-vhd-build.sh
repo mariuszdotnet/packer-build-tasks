@@ -17,3 +17,7 @@ packer validate -var-file="variables.json" -var-file="packer-secrets.json" windo
 
 #echo 'start packer build'
 #packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
+
+echo 'TEMP STUFF'
+cd packer-templates/
+ls -al
