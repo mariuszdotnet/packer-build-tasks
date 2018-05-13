@@ -2,6 +2,7 @@
 
 #echo 'TEMP STUFF'
 #cd /
+cd ..
 ls -al
 git clone packer-build-tasks output-manifest
 cd output-manifest
