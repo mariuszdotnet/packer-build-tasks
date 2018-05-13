@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git clone packer-build-tasks output-manifest
+
 echo 'List root directory content'
 ls -al
 
