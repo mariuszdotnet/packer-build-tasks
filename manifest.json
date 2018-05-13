@@ -1,0 +1,13 @@
+{
+  "builds": [
+    {
+      "name": "azure-arm",
+      "builder_type": "azure-arm",
+      "build_time": 1526106112,
+      "files": null,
+      "artifact_id": "https://packerimagerepoeastus2.blob.core.windows.net/system/Microsoft.Compute/Images/images/packer-osDisk.5e875327-8a44-41f4-a5f1-bfb5ad17e7f8.vhd",
+      "packer_run_uuid": "8a52cb9d-ce10-0459-8e0b-7c33d9edf5e2"
+    }
+  ],
+  "last_run_uuid": "8a52cb9d-ce10-0459-8e0b-7c33d9edf5e2"
+}
