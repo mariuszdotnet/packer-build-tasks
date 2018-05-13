@@ -2,10 +2,10 @@
 
 #echo 'TEMP STUFF'
 #cd /
-#git clone packer-build-tasks output-manifest
-#cd output-manifest
-#ls -al
-#cd ..
+git clone packer-build-tasks output-manifest
+cd output-manifest
+ls -al
+cd ..
 
 echo 'List root directory content'
 ls -al
