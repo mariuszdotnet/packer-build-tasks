@@ -15,15 +15,16 @@ ls -al
 echo 'Start packer validate'
 packer validate -var-file="variables.json" -var-file="packer-secrets.json" windows.json
 
-echo 'start packer build'
-packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
+#echo 'start packer build'
+#packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
 
 echo 'Start pushing packer manifest file to output branch'
 cd ../../
 git clone packer-build-output output-manifest
 
 echo 'Copy manifest file to output directory'
-cp packer-templates/vhd-disk/manifest.json output-manifest/manifest.json
+#cp packer-templates/vhd-disk/manifest.json output-manifest/manifest.json
+touch temp3.txt
 
 cd output-manifest
 git config --global user.email "nobody@concourse-ci.org"
