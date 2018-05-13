@@ -24,4 +24,8 @@ git clone packer-build-tasks output-manifest
 cd output-manifest
 touch test.txt
 echo "Hello World!" > test.txt
+git config --global user.email "nobody@concourse-ci.org"
+git config --global user.name "Concourse"
+git add .
+git commit -m "Added test file"
 ls -al
