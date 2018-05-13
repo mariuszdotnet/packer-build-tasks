@@ -25,6 +25,7 @@ git clone packer-build-output output-manifest
 echo 'Copy manifest file to output directory'
 #cp packer-templates/vhd-disk/manifest.json output-manifest/manifest.json
 touch temp3.txt
+echo "Hello world" > temp3.txt
 
 cd output-manifest
 git config --global user.email "nobody@concourse-ci.org"
