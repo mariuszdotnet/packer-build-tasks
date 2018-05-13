@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo 'TEMP STUFF'
-cd /
-git clone packer-build-tasks output-manifest
+#echo 'TEMP STUFF'
+#cd /
+#git clone packer-build-tasks output-manifest
 #cd output-manifest
 #ls -al
 #cd ..
