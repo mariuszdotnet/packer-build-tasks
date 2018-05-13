@@ -12,6 +12,9 @@ inputs:
   - name: packer-templates
   - name: packer-build-tasks
 
+outputs:
+  - name: output-manifest
+
 run:
   path: ./packer-build-tasks/packer-win-vhd-build.sh
   #path: ls
