@@ -7,6 +7,7 @@ git clone packer-build-tasks output-manifest
 cd output-manifest
 ls -al
 cd /
+ls -al
 
 #echo 'List root directory content'
 #ls -al
