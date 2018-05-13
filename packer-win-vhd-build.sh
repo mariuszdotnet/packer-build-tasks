@@ -21,6 +21,10 @@ packer validate -var-file="variables.json" -var-file="packer-secrets.json" windo
 echo 'Start pushing packer manifest file to output branch'
 cd ../../
 git clone packer-build-output output-manifest
+
+echo 'Copy manifest file to output directory'
+cp packer-templates/vhd-disk/manifest.json output-manifest/manifest.json
+
 cd output-manifest
 git config --global user.email "nobody@concourse-ci.org"
 git config --global user.name "Concourse"
