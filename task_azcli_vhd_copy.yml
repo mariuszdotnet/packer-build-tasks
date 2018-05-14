@@ -9,6 +9,7 @@ image_resource:
 
 inputs:
   - name: packer-build-output
+  - name: packer-build-tasks
 
 run:
   path: ./packer-build-tasks/azcli-vhd-copy.sh
