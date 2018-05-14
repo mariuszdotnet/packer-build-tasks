@@ -27,8 +27,8 @@ echo 'Copy manifest file to output directory'
 
 cd output-manifest
 
-touch temp4.txt
-echo "Hello world2" > temp4.txt
+touch temp5.txt
+echo "Hello world2" > temp5.txt
 
 git config --global user.email "nobody@concourse-ci.org"
 git config --global user.name "Concourse"
