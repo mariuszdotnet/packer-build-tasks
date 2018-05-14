@@ -19,7 +19,7 @@ dest_vhd_uri='mdimage01_OsDisk_1_9_101.vhd'
 dest_image_rg='ImagesRepo'
 dest_image_name='MM_MK_Test3'
 dest_image_os_type='Windows'
-location='canadacentral'
+location='eastus2'
 #
 #Authenticate with service principal
 echo "Authenticating to Azure with service principal $servicePrincipal"
