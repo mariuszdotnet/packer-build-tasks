@@ -51,7 +51,8 @@ az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --
 
 ##IMAGE
 #Create image
+dest_image_src_URI="https://$dest_vhd_storage_account_name.blob.core.windows.net/$vhd_storage_container/$dest_vhd_uri" 
 echo Creating image $dest_image_name
 az account set --subscription $dest_subscriptionId
-imageCopyOp=$(az image create -g $dest_image_rg -n $dest_image_name -l $location --os-type $dest_image_os_type --source $vhd_uri)
+imageCopyOp=$(az image create -g $dest_image_rg -n $dest_image_name -l $location --os-type $dest_image_os_type --source $dest_image_src_URI)
  
