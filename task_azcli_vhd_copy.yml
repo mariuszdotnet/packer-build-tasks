@@ -15,5 +15,3 @@ run:
   path: ./packer-build-tasks/azcli-vhd-copy.sh
   #path: ls
   #args: [-al]
-  params:
-    MK_NAME: ((vsts-user))
