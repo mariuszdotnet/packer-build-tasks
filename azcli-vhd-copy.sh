@@ -5,8 +5,7 @@
 #For servicePrincipal value, use the App ID URI for the AAD service principal object
 #servicePrincipal='https://microsoft.onmicrosoft.com/84083a4c-7291-441d-8bf0-20666c6ec7b9'
 #or App ID '9106aca3-bbd1-4025-9443-ed691f45619e'
-servicePrincipal='9106aca3-bbd1-4025-9443-ed691f45619e'
-servicePrincipalPwd='GIO88YTYUrOG0G7ne8Cq94yez1VBB3bwTksqNUu7wyo='
+
 subscriptionId='0f8b9904-2b81-4c06-b9b8-83bd9be58cde'
 vhd_uri='https://imagesrepoglobal2cac.blob.core.windows.net/images/mdimage01_OsDisk_1_9aabd581bd334a3e8c31934c6eef4209.vhd'
 vhd_storage_account_rg='ImagesRepo'
