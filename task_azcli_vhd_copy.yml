@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: 
+    repository: microsoft/azure-cli
+    tag: latest
+
+inputs:
+  - name: packer-build-output
+
+run:
+  path: ./packer-build-tasks/azcli-vhd-copy.sh
+  #path: ls
+  #args: [-al]
