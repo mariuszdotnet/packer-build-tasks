@@ -50,7 +50,7 @@ else
 fi
 
 #Wait for blob copy to complete
-while [  $blobCopyStatus != "success" ]
+while [  $blobCopyStatus != "\"success\"" ]
 do
     echo "Blob copy in progress. Bytes copied $(az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.progress")"
     sleep 60
