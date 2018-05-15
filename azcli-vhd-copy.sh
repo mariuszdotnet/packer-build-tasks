@@ -21,8 +21,8 @@ servicePrincipalPwd=$servicePrincipalPwd
 vhd_uri=$(jq -r '.builds[].artifact_id' manifest.json)
 subscriptionId=$(jq -r .source_location.subscription_id $config_file)
 vhd_storage_account_rg=$(jq -r .source_location.vhd_storage_account_rg $config_file)
-echo $vhd_storage_account_rg
-vhd_storage_account_name='imagesrepoglobal2cac'
+vhd_storage_account_name=$(jq -r .source_location.vhd_storage_account_name $config_file)
+echo $vhd_storage_account_name
 vhd_storage_container='images'
 dest_subscriptionId='0f8b9904-2b81-4c06-b9b8-83bd9be58cde'
 dest_vhd_storage_account_rg='ImagesRepo'
