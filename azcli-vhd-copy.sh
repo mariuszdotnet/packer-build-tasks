@@ -13,12 +13,13 @@ ls -al
 # Set all environment variables from image_copy_config.json, manifest.json and TASK ENV variables
 echo 'Load all required environment variables for VHD copy to desired region'
 
-jq . manifest.json
-
 servicePrincipal=$servicePrincipal
 servicePrincipalPwd=$servicePrincipalPwd
+
+vhd_uri=$(jq -r '.builds[].artifact_id' manifest.json)
+echo 'vhd_uri='$vhd_uri
+
 subscriptionId='0f8b9904-2b81-4c06-b9b8-83bd9be58cde'
-vhd_uri='https://imagesrepoglobal2cac.blob.core.windows.net/images/mdimage01_OsDisk_1_9aabd581bd334a3e8c31934c6eef4209.vhd'
 vhd_storage_account_rg='ImagesRepo'
 vhd_storage_account_name='imagesrepoglobal2cac'
 vhd_storage_container='images'
