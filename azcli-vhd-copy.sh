@@ -1,7 +1,19 @@
 #!/bin/bash 
 ### VM image file cross-region distrubution and image creation
 ### Date: May 11, 2018
-#Get the service principal creds from input file and set as variables
+
+# Copy 'manifest.json' into working directory 'packer-build-tasks'
+echo 'Copy manifestjson into packer-build-tasks'
+cp packer-build-output/manifest.json packer-build-tasks/manifest.json
+
+echo 'Change to packer template directory and list content'
+cd packer-build-tasks
+ls -al
+
+# Set all environment variables from image_copy_config.json, manifest.json and TASK ENV variables
+echo 'Load all required environment variables for VHD copy to desired region'
+
+jq . manifest.json
 
 servicePrincipal=$servicePrincipal
 servicePrincipalPwd=$servicePrincipalPwd
@@ -18,52 +30,3 @@ dest_image_rg='ImagesRepo'
 dest_image_name='MM_MK_Test3'
 dest_image_os_type='Windows'
 location='eastus2'
-#
-#Authenticate with service principal
-echo "Authenticating to Azure with service principal $servicePrincipal"
-echo "and pwd $servicePrincipalPwd"
-az login --service-principal -u "$servicePrincipal" --password "$servicePrincipalPwd" --tenant "microsoft.onmicrosoft.com"
-echo 'Azure login completed'
-az account set --subscription $subscriptionId
-#
-#TODO: Confirm if access keys are even needed - appears to work without
-#Get storage account access keys
-sourceStorageAccountKey=$(az storage account keys list -g $vhd_storage_account_rg --account-name $vhd_storage_account_name --query "[:1].value" -o tsv)
-targetStorageAccountKey=$(az storage account keys list -g $dest_vhd_storage_account_rg --account-name $dest_vhd_storage_account_name --query "[:1].value" -o tsv)
-#
-#Start blob copy
-dest_image_src_URI="https://$dest_vhd_storage_account_name.blob.core.windows.net/$vhd_storage_container/$dest_vhd_uri"
-blobCopyStatus=$(az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
-echo "Current blob copy status: $blobCopyStatus"
-#Blob statuses: "pending", "success"
-#Check if copy operation in progress
-if [ $blobCopyStatus == "\"pending\"" ]
-then
-  echo "Copy operation already in progress to $dest_image_src_URI. Switching to monitoring"
-else
-  echo "Starting blob copy operation from $vhd_uri to $dest_image_src_URI"
-  copyId=$(az storage blob copy start --source-uri $vhd_uri --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-name $dest_vhd_storage_account_name )
-    #Appears that storage account key is not required for auth
-    #az storage blob copy start --source-uri $vhd_uri --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-name $dest_vhd_storage_account_name --account-key $targetStorageAccountKey --source-account-key $sourceStorageAccountKey
-fi
-
-#Wait for blob copy to complete
-while [  $blobCopyStatus != "\"success\"" ]
-do
-    echo "Blob copy in progress. Bytes copied $(az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.progress")"
-    sleep 60
-    blobCopyStatus=$(az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
-done
-
-echo "Blob copy completed"     
-az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status"
-
-##IMAGE
-#Create image
-echo "Creating image $dest_image_name in region $location from VHD $dest_image_src_URI"
-az account set --subscription $dest_subscriptionId
-imageCopyOp=$(az image create -g $dest_image_rg -n $dest_image_name -l $location --os-type $dest_image_os_type --source $dest_image_src_URI)
-echo "Image copy operation status:"
-echo $imageCopyOp
-
-echo "Script finished"
