@@ -24,9 +24,9 @@ git clone packer-build-output output-manifest
 
 echo 'Copy manifest file to output directory'
 cp packer-templates/vhd-disk/manifest.json output-manifest/manifest.json
+cd output-manifest
 
 # TODO: TESTING CODE DELETE WHEN DONE
-#cd output-manifest
 #touch temp6.txt
 #echo "Hello world2" > temp6.txt
 
