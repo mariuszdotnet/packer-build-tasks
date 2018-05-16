@@ -14,16 +14,18 @@ ls -al
 echo 'Load all required environment variables for VHD copy to desired region'
 
 config_file='image_copy_config.json'
-
 servicePrincipal=$servicePrincipal
 servicePrincipalPwd=$servicePrincipalPwd
 
+# Set source location variables
 vhd_uri=$(jq -r '.builds[].artifact_id' manifest.json)
 subscriptionId=$(jq -r .source_location.subscription_id $config_file)
 vhd_storage_account_rg=$(jq -r .source_location.vhd_storage_account_rg $config_file)
 vhd_storage_account_name=$(jq -r .source_location.vhd_storage_account_name $config_file)
-echo $vhd_storage_account_name
-vhd_storage_container='images'
+
+# Set target region location specific variables
+targer_region_json=$(jq '.region_location[] | select(any(.location; . == "eastus2"))' $config_file)
+vhd_storage_container='tbd'
 dest_subscriptionId='0f8b9904-2b81-4c06-b9b8-83bd9be58cde'
 dest_vhd_storage_account_rg='ImagesRepo'
 dest_vhd_storage_account_name='imagesrepoglobal2'

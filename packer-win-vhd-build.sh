@@ -15,7 +15,7 @@ ls -al
 echo 'Start packer validate'
 packer validate -var-file="variables.json" -var-file="packer-secrets.json" windows.json
 
-#echo 'start packer build'
+echo 'start packer build'
 packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
 
 echo 'Start pushing packer manifest file to output branch'
