@@ -24,7 +24,7 @@ vhd_storage_account_rg=$(jq -r .source_location.vhd_storage_account_rg $config_f
 vhd_storage_account_name=$(jq -r .source_location.vhd_storage_account_name $config_file)
 
 # Set target region location specific variables
-targer_region_json=$(jq '.region_location[] | select(any(.location; . == "eastus2"))' $config_file)
+targer_region_json=$(jq '.region_location[] | select(any(.location; . == "canadacentral"))' $config_file)
 echo $targer_region_json
 vhd_storage_container='tbd'
 dest_subscriptionId='0f8b9904-2b81-4c06-b9b8-83bd9be58cde'
