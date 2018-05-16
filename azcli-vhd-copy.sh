@@ -25,6 +25,7 @@ vhd_storage_account_name=$(jq -r .source_location.vhd_storage_account_name $conf
 
 # Set target region location specific variables
 targer_region_json=$(jq '.region_location[] | select(any(.location; . == "eastus2"))' $config_file)
+echo $targer_region_json
 vhd_storage_container='tbd'
 dest_subscriptionId='0f8b9904-2b81-4c06-b9b8-83bd9be58cde'
 dest_vhd_storage_account_rg='ImagesRepo'
