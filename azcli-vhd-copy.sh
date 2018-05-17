@@ -29,7 +29,6 @@ location=$(echo $targer_region_json | jq -r '.location')
 vhd_storage_container=$(echo $targer_region_json | jq -r '.vhd_storage_container')
 dest_subscriptionId=$(echo $targer_region_json | jq -r '.subscription_id')
 dest_vhd_storage_account_rg=$(echo $targer_region_json | jq -r '.vhd_storage_account_rg')
-ech $dest_vhd_storage_account_rg
 dest_vhd_storage_account_name=$(echo $targer_region_json | jq -r '.vhd_storage_account_name')
 dest_vhd_uri=$(echo $targer_region_json | jq -r '.vhd_uri')
 
@@ -41,20 +40,18 @@ dest_vhd_uri=$(echo $targer_region_json | jq -r '.vhd_uri')
 
 #Authenticate with service principal
 echo "Authenticating to Azure with service principal $servicePrincipal"
-echo "and pwd $servicePrincipalPwd"
+#echo "and pwd $servicePrincipalPwd"
 az login --service-principal -u "$servicePrincipal" --password "$servicePrincipalPwd" --tenant "microsoft.onmicrosoft.com"
 echo 'Azure login completed'
 az account set --subscription $subscriptionId
-#
+
 #TODO: Confirm if access keys are even needed - appears to work without
 #Get storage account access keys
 
-echo "1"
 sourceStorageAccountKey=$(az storage account keys list -g $vhd_storage_account_rg --account-name $vhd_storage_account_name --query "[:1].value" -o tsv)
-echo "2"
 targetStorageAccountKey=$(az storage account keys list -g $dest_vhd_storage_account_rg --account-name $dest_vhd_storage_account_name --query "[:1].value" -o tsv)
-echo "3"
 #Start blob copy
+
 dest_image_src_URI="https://$dest_vhd_storage_account_name.blob.core.windows.net/$vhd_storage_container/$dest_vhd_uri"
 blobCopyStatus=$(az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
 echo "Current blob copy status: $blobCopyStatus"
