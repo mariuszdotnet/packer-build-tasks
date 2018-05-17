@@ -16,7 +16,7 @@ echo 'Start packer validate'
 packer validate -var-file="variables.json" -var-file="packer-secrets.json" windows.json
 
 echo 'start packer build'
-packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
+#packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
 
 echo 'Start pushing packer manifest file to output branch'
 cd ../../
@@ -27,8 +27,9 @@ cp packer-templates/vhd-disk/manifest.json output-manifest/manifest.json
 cd output-manifest
 
 # TODO: TESTING CODE DELETE WHEN DONE
-#touch temp6.txt
-#echo "Hello world2" > temp6.txt
+tempFileString=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+touch tempfile.txt
+echo $tempFileString > tempfile.txt
 
 git config --global user.email "nobody@concourse-ci.org"
 git config --global user.name "Concourse"
