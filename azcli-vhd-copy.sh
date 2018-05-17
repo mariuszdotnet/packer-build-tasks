@@ -32,6 +32,7 @@ dest_vhd_storage_account_rg=$(echo $targer_region_json | jq -r '.vhd_storage_acc
 dest_vhd_storage_account_name=$(echo $targer_region_json | jq -r '.vhd_storage_account_name')
 dest_vhd_uri=$(echo $targer_region_json | jq -r '.vhd_uri')
 
+printenv
 
 #dest_image_rg='ImagesRepo'
 #dest_image_name='MM_MK_Test3'
