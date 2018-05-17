@@ -57,7 +57,7 @@ blobCopyStatus=$(az storage blob show --container-name $vhd_storage_container -n
 echo "Current blob copy status: $blobCopyStatus"
 #Blob statuses: "pending", "success"
 #Check if copy operation in progress
-if [ $blobCopyStatus == "\"pending\"" ]
+if [[ $blobCopyStatus == "\"pending\"" ]]
 then
   echo "Copy operation already in progress to $dest_image_src_URI. Switching to monitoring"
 else
