@@ -26,8 +26,8 @@
         {
             "location":"canadacentral",
             "subscription_id":"5aec60e9-f535-4bd7-a951-2833f043e918",
-            "vhd_storage_account_rg":"vhd_storage_account_rg",
-            "vhd_storage_account_name":"packerimagerepoeastus2",
+            "vhd_storage_account_rg":"packer_image-repo-1-rg",
+            "vhd_storage_account_name":"packer_image-repo-1-rg",
             "vhd_storage_container":"vhdbase",
             "vhd_uri":"packer-win-vm-osdisk.vhd",
             "subscription": [
