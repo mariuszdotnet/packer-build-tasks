@@ -3,11 +3,11 @@
     {
       "name": "azure-arm",
       "builder_type": "azure-arm",
-      "build_time": 1526491099,
+      "build_time": 1526527430,
       "files": null,
-      "artifact_id": "https://packerimagerepoeastus2.blob.core.windows.net/system/Microsoft.Compute/Images/images/packer-osDisk.6089f4e7-a394-49ef-9f36-12f3a4e362c9.vhd",
-      "packer_run_uuid": "30f534e1-1a28-d94e-cdf2-83b22cef9c30"
+      "artifact_id": "https://packerimagerepoeastus2.blob.core.windows.net/system/Microsoft.Compute/Images/images/packer-osDisk.5294d92e-e174-4eb6-a3e5-93d549e8e6ce.vhd",
+      "packer_run_uuid": "8405dc40-1298-b1db-dd04-808aabf62d2f"
     }
   ],
-  "last_run_uuid": "30f534e1-1a28-d94e-cdf2-83b22cef9c30"
+  "last_run_uuid": "8405dc40-1298-b1db-dd04-808aabf62d2f"
 }
