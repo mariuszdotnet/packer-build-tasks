@@ -23,15 +23,16 @@ subscriptionId=$(jq -r .source_location.subscription_id $config_file)
 vhd_storage_account_rg=$(jq -r .source_location.vhd_storage_account_rg $config_file)
 vhd_storage_account_name=$(jq -r .source_location.vhd_storage_account_name $config_file)
 
-# Set target region location specific variables
+# Set target region location specific variables for VHD copy
 targer_region_json=$(jq --arg regionLocation $regionLocation '.region_location[] | select(any(.location; . == $regionLocation))' $config_file)
+location=$(echo $targer_region_json | jq -r '.location')
 vhd_storage_container=$(echo $targer_region_json | jq -r '.vhd_storage_container')
-echo $vhd_storage_container
-dest_subscriptionId='0f8b9904-2b81-4c06-b9b8-83bd9be58cde'
-dest_vhd_storage_account_rg='ImagesRepo'
-dest_vhd_storage_account_name='imagesrepoglobal2'
-dest_vhd_uri='mdimage01_OsDisk_1_9_101.vhd'
-dest_image_rg='ImagesRepo'
-dest_image_name='MM_MK_Test3'
-dest_image_os_type='Windows'
-location='eastus2'
+dest_subscriptionId=$(echo $targer_region_json | jq -r '.subscription_id')
+dest_vhd_storage_account_rg=$(echo $targer_region_json | jq -r '.vhd_storage_account_rg')
+dest_vhd_storage_account_name=$(echo $targer_region_json | jq -r '.vhd_storage_account_name')
+dest_vhd_uri=$(echo $targer_region_json | jq -r '.vhd_uri')
+
+
+#dest_image_rg='ImagesRepo'
+#dest_image_name='MM_MK_Test3'
+#dest_image_os_type='Windows'
