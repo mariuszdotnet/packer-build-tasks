@@ -17,6 +17,7 @@ packer validate -var-file="variables.json" -var-file="packer-secrets.json" windo
 
 echo 'start packer build'
 #packer build -var-file="variables.json" -var-file="packer-secrets.json" windows.json
+# remove build
 
 echo 'Start pushing packer manifest file to output branch'
 cd ../../
