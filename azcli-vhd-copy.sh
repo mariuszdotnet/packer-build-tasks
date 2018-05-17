@@ -29,6 +29,7 @@ location=$(echo $targer_region_json | jq -r '.location')
 vhd_storage_container=$(echo $targer_region_json | jq -r '.vhd_storage_container')
 dest_subscriptionId=$(echo $targer_region_json | jq -r '.subscription_id')
 dest_vhd_storage_account_rg=$(echo $targer_region_json | jq -r '.vhd_storage_account_rg')
+ech $dest_vhd_storage_account_rg
 dest_vhd_storage_account_name=$(echo $targer_region_json | jq -r '.vhd_storage_account_name')
 dest_vhd_uri=$(echo $targer_region_json | jq -r '.vhd_uri')
 
