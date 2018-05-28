@@ -22,11 +22,12 @@ vhd_uri=$(jq -r '.builds[].artifact_id' manifest.json)
 subscriptionId=$(jq -r .source_location.subscription_id $config_file)
 vhd_storage_account_rg=$(jq -r .source_location.vhd_storage_account_rg $config_file)
 vhd_storage_account_name=$(jq -r .source_location.vhd_storage_account_name $config_file)
+vhd_storage_container=$(jq -r .source_location.vhd_storage_container $config_file)
 
 # Set target region location specific variables for VHD copy
 target_region_json=$(jq --arg regionLocation $regionLocation '.region_location[] | select(any(.location; . == $regionLocation))' $config_file)
 location=$(echo $target_region_json | jq -r '.location')
-vhd_storage_container=$(echo $target_region_json | jq -r '.vhd_storage_container')
+dest_vhd_storage_container=$(echo $target_region_json | jq -r '.vhd_storage_container')
 dest_subscriptionId=$(echo $target_region_json | jq -r '.subscription_id')
 dest_vhd_storage_account_rg=$(echo $target_region_json | jq -r '.vhd_storage_account_rg')
 dest_vhd_storage_account_name=$(echo $target_region_json | jq -r '.vhd_storage_account_name')
@@ -53,7 +54,7 @@ targetStorageAccountKey=$(az storage account keys list -g $dest_vhd_storage_acco
 #Start blob copy
 
 dest_image_src_URI="https://$dest_vhd_storage_account_name.blob.core.windows.net/$vhd_storage_container/$dest_vhd_uri"
-blobCopyStatus=$(az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
+blobCopyStatus=$(az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
 echo "Current blob copy status: $blobCopyStatus"
 #Blob statuses: "pending", "success"
 #Check if copy operation in progress
@@ -62,17 +63,16 @@ then
   echo "Copy operation already in progress to $dest_image_src_URI. Switching to monitoring"
 else
   echo "Starting blob copy operation from $vhd_uri to $dest_image_src_URI"
-  #copyId=$(az storage blob copy start --source-uri $vhd_uri --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-name $dest_vhd_storage_account_name --account-key $targetStorageAccountKey --source-account-key $sourceStorageAccountKey)
-  copyId=$(az storage blob copy start --source-account-name 'packerimagerepoeastus2' --source-blob 'Microsoft.Compute/Images/images/packer-osDisk.5294d92e-e174-4eb6-a3e5-93d549e8e6ce.vhd' --source-container 'system' --source-account-key $sourceStorageAccountKey --account-name $dest_vhd_storage_account_name --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-key $targetStorageAccountKey)
+  copyId=$(az storage blob copy start --source-account-name $vhd_storage_account_name --source-blob 'Microsoft.Compute/Images/images/packer-osDisk.5294d92e-e174-4eb6-a3e5-93d549e8e6ce.vhd' --source-container $vhd_storage_container --source-account-key $sourceStorageAccountKey --account-name $dest_vhd_storage_account_name --destination-blob $dest_vhd_uri --destination-container $dest_vhd_storage_container --account-key $targetStorageAccountKey)
 fi
 
 #Wait for blob copy to complete
 while [[ $blobCopyStatus != "\"success\"" ]]
 do
-    echo "Blob copy in progress. Bytes copied $(az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.progress")"
+    echo "Blob copy in progress. Bytes copied $(az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.progress")"
     sleep 15
-    blobCopyStatus=$(az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
+    blobCopyStatus=$(az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
 done
 
 echo "Blob copy completed"     
-az storage blob show --container-name $vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status"
+az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status"
