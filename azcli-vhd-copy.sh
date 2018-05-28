@@ -62,7 +62,7 @@ then
   echo "Copy operation already in progress to $dest_image_src_URI. Switching to monitoring"
 else
   echo "Starting blob copy operation from $vhd_uri to $dest_image_src_URI"
-  copyId=$(az storage blob copy start --source-uri $vhd_uri --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-name $dest_vhd_storage_account_name )
+  copyId=$(az storage blob copy start --source-uri $vhd_uri --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-name $dest_vhd_storage_account_name --account-key $targetStorageAccountKey --source-account-key $sourceStorageAccountKey)
     #Appears that storage account key is not required for auth
     #az storage blob copy start --source-uri $vhd_uri --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-name $dest_vhd_storage_account_name --account-key $targetStorageAccountKey --source-account-key $sourceStorageAccountKey
 fi
