@@ -62,9 +62,9 @@ then
   echo "Copy operation already in progress to $dest_image_src_URI. Switching to monitoring"
 else
   echo "Starting blob copy operation from $vhd_uri to $dest_image_src_URI"
-  copyId=$(az storage blob copy start --source-uri $vhd_uri --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-name $dest_vhd_storage_account_name --account-key $targetStorageAccountKey --source-account-key $sourceStorageAccountKey)
-    #Appears that storage account key is not required for auth
-    #az storage blob copy start --source-uri $vhd_uri --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-name $dest_vhd_storage_account_name --account-key $targetStorageAccountKey --source-account-key $sourceStorageAccountKey
+  #copyId=$(az storage blob copy start --source-uri $vhd_uri --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-name $dest_vhd_storage_account_name --account-key $targetStorageAccountKey --source-account-key $sourceStorageAccountKey)
+  copyId=$(az storage blob copy start --source-account-name 'packerimagerepoeastus2' --source-blob 'Microsoft.Compute/Images/images/packer-osDisk.5294d92e-e174-4eb6-a3e5-93d549e8e6ce.vhd' --source-container 'system' --source-account-key $sourceStorageAccountKey --account-name $dest_vhd_storage_account_name --destination-blob $dest_vhd_uri --destination-container $vhd_storage_container --account-key $targetStorageAccountKey)
+)
 fi
 
 #Wait for blob copy to complete
