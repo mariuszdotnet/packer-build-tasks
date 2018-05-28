@@ -19,7 +19,7 @@ servicePrincipalPwd=$servicePrincipalPwd
 
 # Set source location variables
 vhd_uri=$(jq -r '.builds[].artifact_id' manifest.json)
-vhd_name=${vhd_uri##*/}
+vhd_name=${vhd_uri#*system/}
 subscriptionId=$(jq -r .source_location.subscription_id $config_file)
 vhd_storage_account_rg=$(jq -r .source_location.vhd_storage_account_rg $config_file)
 vhd_storage_account_name=$(jq -r .source_location.vhd_storage_account_name $config_file)
