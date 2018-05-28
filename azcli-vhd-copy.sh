@@ -19,6 +19,7 @@ servicePrincipalPwd=$servicePrincipalPwd
 
 # Set source location variables
 vhd_uri=$(jq -r '.builds[].artifact_id' manifest.json)
+vhd_name=${vhd_uri##*/}
 subscriptionId=$(jq -r .source_location.subscription_id $config_file)
 vhd_storage_account_rg=$(jq -r .source_location.vhd_storage_account_rg $config_file)
 vhd_storage_account_name=$(jq -r .source_location.vhd_storage_account_name $config_file)
@@ -63,7 +64,7 @@ then
   echo "Copy operation already in progress to $dest_image_src_URI. Switching to monitoring"
 else
   echo "Starting blob copy operation from $vhd_uri to $dest_image_src_URI"
-  copyId=$(az storage blob copy start --source-account-name $vhd_storage_account_name --source-blob 'Microsoft.Compute/Images/images/packer-osDisk.5294d92e-e174-4eb6-a3e5-93d549e8e6ce.vhd' --source-container $vhd_storage_container --source-account-key $sourceStorageAccountKey --account-name $dest_vhd_storage_account_name --destination-blob $dest_vhd_uri --destination-container $dest_vhd_storage_container --account-key $targetStorageAccountKey)
+  copyId=$(az storage blob copy start --source-account-name $vhd_storage_account_name --source-blob $vhd_name --source-container $vhd_storage_container --source-account-key $sourceStorageAccountKey --account-name $dest_vhd_storage_account_name --destination-blob $dest_vhd_uri --destination-container $dest_vhd_storage_container --account-key $targetStorageAccountKey)
 fi
 
 #Wait for blob copy to complete
