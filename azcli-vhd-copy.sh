@@ -71,7 +71,7 @@ fi
 while [[ $blobCopyStatus != "\"success\"" ]]
 do
     echo "Blob copy in progress. Bytes copied $(az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.progress")"
-    sleep 15
+    sleep 10
     blobCopyStatus=$(az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
 done
 
