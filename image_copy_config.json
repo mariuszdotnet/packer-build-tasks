@@ -1,6 +1,6 @@
-{
+ {
     "source_location": {
-        "description":"Configuration for source VHD that will be copied to other regions base subscriptions",
+        "description":"Configuration for source VHD that will be copied to other regions base subscriptions test",
         "vhd_uri":"",
         "vhd_storage_account_rg":"packer-image-repo-rg",
         "vhd_storage_account_name":"packerimagerepoeastus2",
