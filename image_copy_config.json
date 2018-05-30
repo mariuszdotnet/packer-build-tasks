@@ -17,7 +17,13 @@
             "vhd_uri":"packer-win-vm-osdisk3.vhd",
             "subscription": [
                 {
-                    "subscription_id":"5aec60e9-f535-4bd7-a951-2833f043e918",
+                    "subscription_id":"123",
+                    "image_rg":"packer-image-repo-rg",
+                    "image_name":"packer-win-vm-osdisk",
+                    "image_os_type":"Windows"
+                },
+                {
+                    "subscription_id":"456",
                     "image_rg":"packer-image-repo-rg",
                     "image_name":"packer-win-vm-osdisk",
                     "image_os_type":"Windows"
@@ -33,7 +39,13 @@
             "vhd_uri":"packer-win-vm-osdisk.vhd",
             "subscription": [
                 {
-                    "subscription_id":"5aec60e9-f535-4bd7-a951-2833f043e918",
+                    "subscription_id":"123",
+                    "image_rg":"packer-image-repo-rg",
+                    "image_name":"packer-win-vm-osdisk",
+                    "image_os_type":"Windows"
+                },
+                {
+                    "subscription_id":"456",
                     "image_rg":"packer-image-repo-rg",
                     "image_name":"packer-win-vm-osdisk",
                     "image_os_type":"Windows"

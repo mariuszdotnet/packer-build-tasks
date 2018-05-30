@@ -34,12 +34,6 @@ dest_vhd_storage_account_rg=$(echo $target_region_json | jq -r '.vhd_storage_acc
 dest_vhd_storage_account_name=$(echo $target_region_json | jq -r '.vhd_storage_account_name')
 dest_vhd_uri=$(echo $target_region_json | jq -r '.vhd_uri')
 
-#printenv
-#dest_image_rg='ImagesRepo'
-#dest_image_name='MM_MK_Test3'
-#dest_image_os_type='Windows'
-
-
 #Authenticate with service principal
 echo "Authenticating to Azure with service principal $servicePrincipal"
 #echo "and pwd $servicePrincipalPwd"
@@ -47,7 +41,6 @@ az login --service-principal -u "$servicePrincipal" --password "$servicePrincipa
 echo 'Azure login completed'
 az account set --subscription $subscriptionId
 
-#TODO: Confirm if access keys are even needed - appears to work without
 #Get storage account access keys
 
 sourceStorageAccountKey=$(az storage account keys list -g $vhd_storage_account_rg --account-name $vhd_storage_account_name --query "[:1].value" -o tsv)
