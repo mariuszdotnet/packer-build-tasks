@@ -14,14 +14,14 @@
             "vhd_storage_account_rg":"packer-image-repo-rg",
             "vhd_storage_account_name":"packerimagerepoeastus2",
             "vhd_storage_container":"vhdbase",
-            "vhd_uri":"packer-win-vm-osdisk4.vhd",
+            "vhd_uri":"packer-win-vm-osdisk5.vhd",
             "subscription": [
                 {
                     "subscription_id":"5aec60e9-f535-4bd7-a951-2833f043e918",
                     "vhd_storage_account_rg":"packer-image-repo-rg",
-                    "vhd_storage_account_name":"packerblobnew",
+                    "vhd_storage_account_name":"packerblobv1",
                     "vhd_storage_container":"vhdbase",
-                    "vhd_uri":"packer-win-vm-osdisk4.vhd"
+                    "vhd_uri":"packer-win-vm-osdisk5.vhd"
                 }
             ]
         },
