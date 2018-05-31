@@ -27,6 +27,7 @@ vhd_storage_container=$(jq -r .source_location.vhd_storage_container $config_fil
 
 # Set target region location specific variables for VHD copy
 target_region_json=$(jq --arg regionLocation $regionLocation '.region_location[] | select(any(.location; . == $regionLocation))' $config_file)
+## TODO: Check that location is actually used, REMOVE ME!
 location=$(echo $target_region_json | jq -r '.location')
 dest_vhd_storage_container=$(echo $target_region_json | jq -r '.vhd_storage_container')
 dest_subscriptionId=$(echo $target_region_json | jq -r '.subscription_id')
