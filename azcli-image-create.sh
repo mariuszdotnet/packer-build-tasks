@@ -54,4 +54,29 @@ for row in $(echo $subscriptions | jq -r '.[] | @base64'); do
 
     #Get target storage account access keys
     targetStorageAccountKey=$(az storage account keys list -g $dest_vhd_storage_account_rg --account-name $dest_vhd_storage_account_name --query "[:1].value" -o tsv)
+
+    #Start VHD copy within region across subscriptions
+    dest_image_src_URI="https://$dest_vhd_storage_account_name.blob.core.windows.net/$vhd_storage_container/$dest_vhd_uri"
+    blobCopyStatus=$(az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
+    echo "Current blob copy status: $blobCopyStatus"
+    #Blob statuses: "pending", "success"
+    #Check if copy operation in progress
+    if [[ $blobCopyStatus == "\"pending\"" ]]
+    then
+    echo "Copy operation already in progress to $dest_image_src_URI. Switching to monitoring"
+    else
+    echo "Starting blob copy operation from $vhd_uri to $dest_image_src_URI"
+    copyId=$(az storage blob copy start --source-account-name $vhd_storage_account_name --source-blob $vhd_name --source-container $vhd_storage_container --source-account-key $sourceStorageAccountKey --account-name $dest_vhd_storage_account_name --destination-blob $dest_vhd_uri --destination-container $dest_vhd_storage_container --account-key $targetStorageAccountKey)
+    fi
+
+    #Wait for blob copy to complete
+    while [[ $blobCopyStatus != "\"success\"" ]]
+    do
+        echo "Blob copy in progress. Bytes copied $(az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.progress")"
+        sleep 10
+        blobCopyStatus=$(az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status")
+    done
+
+    echo "Blob copy completed"     
+    az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status"
 done
