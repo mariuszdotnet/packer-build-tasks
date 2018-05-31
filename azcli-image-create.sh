@@ -41,22 +41,23 @@ target_region_json=$(jq --arg regionLocation $regionLocation '.region_location[]
 subscriptions=$(echo $target_region_json | jq -r '.subscription')
 
 for row in $(echo $subscriptions | jq -r '.[] | @base64'); do
-        _jq() {
-                echo $row | base64 -d | jq -r ${1}
-        }
+    _jq() {
+            echo $row | base64 -d | jq -r ${1}
+    }
 
-        echo $(_jq '.subscription_id')
+    echo $(_jq '.')
+
+    # Set target region location specific variables for VHD copy
+    #target_region_json=$(jq --arg regionLocation $regionLocation '.region_location[] | select(any(.location; . == $regionLocation))' $config_file)
+    #location=$(echo $target_region_json | jq -r '.location')
+    #dest_vhd_storage_container=$(echo $target_region_json | jq -r '.vhd_storage_container')
+    #dest_subscriptionId=$(echo $target_region_json | jq -r '.subscription_id')
+    #dest_vhd_storage_account_rg=$(echo $target_region_json | jq -r '.vhd_storage_account_rg')
+    #dest_vhd_storage_account_name=$(echo $target_region_json | jq -r '.vhd_storage_account_name')
+    #dest_vhd_uri=$(echo $target_region_json | jq -r '.vhd_uri')
 done
 
 
 #Get target storage account access keys
 #targetStorageAccountKey=$(az storage account keys list -g $dest_vhd_storage_account_rg --account-name $dest_vhd_storage_account_name --query "[:1].value" -o tsv)
 
-# Set target region location specific variables for VHD copy
-#target_region_json=$(jq --arg regionLocation $regionLocation '.region_location[] | select(any(.location; . == $regionLocation))' $config_file)
-#location=$(echo $target_region_json | jq -r '.location')
-#dest_vhd_storage_container=$(echo $target_region_json | jq -r '.vhd_storage_container')
-#dest_subscriptionId=$(echo $target_region_json | jq -r '.subscription_id')
-#dest_vhd_storage_account_rg=$(echo $target_region_json | jq -r '.vhd_storage_account_rg')
-#dest_vhd_storage_account_name=$(echo $target_region_json | jq -r '.vhd_storage_account_name')
-#dest_vhd_uri=$(echo $target_region_json | jq -r '.vhd_uri')
