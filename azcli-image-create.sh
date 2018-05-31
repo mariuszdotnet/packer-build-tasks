@@ -42,7 +42,7 @@ subscriptions=$(echo $target_region_json | jq -r '.subscription')
 
 for row in $(echo $subscriptions | jq -r '.[] | @base64'); do
         _jq() {
-                echo $row | base64 --decode | jq -r ${1}
+                echo $row | base64 -d | jq -r ${1}
         }
 
         echo $(_jq '.subscription_id')
