@@ -45,18 +45,13 @@ for row in $(echo $subscriptions | jq -r '.[] | @base64'); do
             echo $row | base64 -d | jq -r ${1}
     }
 
-    echo $(_jq '.vhd_uri')
-
-    # Set target region location specific variables for VHD copy
-    
+    #Set target region location specific variables for VHD copy  
     dest_vhd_storage_container=echo $(_jq '.vhd_storage_container')
     dest_subscriptionId=echo $(_jq '.subscription_id')
     dest_vhd_storage_account_rg=echo $(_jq '.vhd_storage_account_rg')
     dest_vhd_storage_account_name=echo $(_jq '.vhd_storage_account_name')
     dest_vhd_uri=echo $(_jq '.vhd_uri')
+
+    #Get target storage account access keys
+    targetStorageAccountKey=$(az storage account keys list -g $dest_vhd_storage_account_rg --account-name $dest_vhd_storage_account_name --query "[:1].value" -o tsv)
 done
-
-
-#Get target storage account access keys
-#targetStorageAccountKey=$(az storage account keys list -g $dest_vhd_storage_account_rg --account-name $dest_vhd_storage_account_name --query "[:1].value" -o tsv)
-

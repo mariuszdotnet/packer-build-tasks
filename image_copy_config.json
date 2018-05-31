@@ -21,10 +21,7 @@
                     "vhd_storage_account_rg":"packer-image-repo-rg",
                     "vhd_storage_account_name":"packerimagerepoeastus2",
                     "vhd_storage_container":"vhdbase",
-                    "vhd_uri":"packer-win-vm-osdisk3.vhd",
-                    "image_rg":"packer-image-repo-rg",
-                    "image_name":"packer-win-vm-osdisk",
-                    "image_os_type":"Windows"
+                    "vhd_uri":"packer-win-vm-osdisk3.vhd"
                 },
                 {
                     "subscription_id":"456",
