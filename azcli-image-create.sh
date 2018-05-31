@@ -47,10 +47,16 @@ for row in $(echo $subscriptions | jq -r '.[] | @base64'); do
 
     #Set target region location specific variables for VHD copy  
     dest_vhd_storage_container=$(_jq '.vhd_storage_container')
-    dest_subscriptionId=$(_jq '.subscription_id')
     dest_vhd_storage_account_rg=$(_jq '.vhd_storage_account_rg')
     dest_vhd_storage_account_name=$(_jq '.vhd_storage_account_name')
     dest_vhd_uri=$(_jq '.vhd_uri')
+
+    #Set target region location specific variable for image creation
+    dest_subscriptionId=$(_jq '.subscription_id')
+    dest_image_rg=$(_jq '.image_rg')
+    dest_image_name=$(_jq '.image_name')
+    dest_image_os_type=$(_jq '.image_os_type')
+    location=$(_jq '.location')
 
     #Get target storage account access keys
     targetStorageAccountKey=$(az storage account keys list -g $dest_vhd_storage_account_rg --account-name $dest_vhd_storage_account_name --query "[:1].value" -o tsv)
@@ -79,4 +85,13 @@ for row in $(echo $subscriptions | jq -r '.[] | @base64'); do
 
     echo "Blob copy completed"     
     az storage blob show --container-name $dest_vhd_storage_container -n $dest_vhd_uri --account-name $dest_vhd_storage_account_name --query "properties.copy.status"
+
+    #Create image
+    echo "Creating image $dest_image_name in region $location from VHD $dest_image_src_URI"
+    az account set --subscription $dest_subscriptionId
+    imageCopyOp=$(az image create -g $dest_image_rg -n $dest_image_name -l $location --os-type $dest_image_os_type --source $dest_image_src_URI)
+    echo "Image copy operation status:"
+    echo $imageCopyOp
+
+    echo "Script finished"
 done
