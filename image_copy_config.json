@@ -23,7 +23,7 @@
                     "vhd_storage_container":"vhdbase",
                     "vhd_uri":"packer-win-vm-osdisk8.vhd",
                     "image_rg":"packer-image-repo-rg",
-                    "image_name":"MM_MK_Test8",
+                    "image_name":"MM_MK_Test9-1",
                     "image_os_type":"Windows",
                     "location":"eastus2"
                 },
@@ -34,7 +34,7 @@
                     "vhd_storage_container":"vhdbase",
                     "vhd_uri":"packer-win-vm-osdisk8.vhd",
                     "image_rg":"packer-image-repo-rg",
-                    "image_name":"MM_MK_Test81",
+                    "image_name":"MM_MK_Test9-2",
                     "image_os_type":"Windows",
                     "location":"eastus2"
                 }
@@ -55,7 +55,7 @@
                     "vhd_storage_container":"vhdbase",
                     "vhd_uri":"packer-win-vm-osdisk8.vhd",
                     "image_rg":"packer-image-repo-rg",
-                    "image_name":"MM_MK_Test8",
+                    "image_name":"MM_MK_Test9-3",
                     "image_os_type":"Windows",
                     "location":"canadacentral"
                 },
@@ -66,7 +66,7 @@
                     "vhd_storage_container":"vhdbase",
                     "vhd_uri":"packer-win-vm-osdisk8.vhd",
                     "image_rg":"packer-image-repo-rg",
-                    "image_name":"MM_MK_Test81",
+                    "image_name":"MM_MK_Test9-4",
                     "image_os_type":"Windows",
                     "location":"canadacentral"
                 }
