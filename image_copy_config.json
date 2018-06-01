@@ -55,18 +55,18 @@
                     "vhd_storage_container":"vhdbase",
                     "vhd_uri":"packer-win-vm-osdisk8.vhd",
                     "image_rg":"packer-image-repo-rg",
-                    "image_name":"MM_MK_Test9-3",
+                    "image_name":"MM_MK_Test9-4",
                     "image_os_type":"Windows",
                     "location":"canadacentral"
                 },
                 {
                     "subscription_id":"5cc5fbe7-51cc-4492-ad12-f923efbb9ade",
                     "vhd_storage_account_rg":"packer-image-repo-rg",
-                    "vhd_storage_account_name":"mkcanadacenraltarget ",
+                    "vhd_storage_account_name":"mkcanadacentral",
                     "vhd_storage_container":"vhdbase",
                     "vhd_uri":"packer-win-vm-osdisk8.vhd",
                     "image_rg":"packer-image-repo-rg",
-                    "image_name":"MM_MK_Test9-4",
+                    "image_name":"MM_MK_Test9-5",
                     "image_os_type":"Windows",
                     "location":"canadacentral"
                 }
