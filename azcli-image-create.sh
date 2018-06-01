@@ -24,6 +24,7 @@ subscriptionId=$(echo $source_region_json | jq -r '.subscription_id')
 vhd_storage_account_rg=$(echo $source_region_json | jq -r '.vhd_storage_account_rg')
 vhd_storage_account_name=$(echo $source_region_json | jq -r '.vhd_storage_account_name')
 vhd_storage_container=$(echo $source_region_json | jq -r '.vhd_storage_container')
+vhd_uri="https://$vhd_storage_account_name.blob.core.windows.net/vhd_storage_container/$vhd_name"
 
 #Authenticate with service principal
 echo "Authenticating to Azure with service principal $servicePrincipal"
@@ -57,6 +58,8 @@ for row in $(echo $subscriptions | jq -r '.[] | @base64'); do
     dest_image_name=$(_jq '.image_name')
     dest_image_os_type=$(_jq '.image_os_type')
     location=$(_jq '.location')
+
+    az account set --subscription $dest_subscriptionId
 
     #Get target storage account access keys
     targetStorageAccountKey=$(az storage account keys list -g $dest_vhd_storage_account_rg --account-name $dest_vhd_storage_account_name --query "[:1].value" -o tsv)
