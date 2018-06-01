@@ -46,19 +46,29 @@
             "vhd_storage_account_rg":"packer_image-repo-1-rg",
             "vhd_storage_account_name":"packerimagerepocdncntral",
             "vhd_storage_container":"vhdbase",
-            "vhd_uri":"packer-win-vm-osdisk.vhd",
+            "vhd_uri":"packer-win-vm-osdisk7.vhd",
             "subscription": [
                 {
-                    "subscription_id":"123",
+                    "subscription_id":"5aec60e9-f535-4bd7-a951-2833f043e918",
+                    "vhd_storage_account_rg":"packer-image-repo-1-rg",
+                    "vhd_storage_account_name":"mkcanadacenraltarget",
+                    "vhd_storage_container":"vhdbase",
+                    "vhd_uri":"packer-win-vm-osdisk7.vhd",
                     "image_rg":"packer-image-repo-rg",
-                    "image_name":"packer-win-vm-osdisk",
-                    "image_os_type":"Windows"
+                    "image_name":"MM_MK_Test3",
+                    "image_os_type":"Windows",
+                    "location":"canadacentral"
                 },
                 {
-                    "subscription_id":"456",
+                    "subscription_id":"5cc5fbe7-51cc-4492-ad12-f923efbb9ade",
+                    "vhd_storage_account_rg":"packer-image-repo-rg",
+                    "vhd_storage_account_name":"mkcanadacenraltarget ",
+                    "vhd_storage_container":"vhdbase",
+                    "vhd_uri":"packer-win-vm-osdisk7.vhd",
                     "image_rg":"packer-image-repo-rg",
-                    "image_name":"packer-win-vm-osdisk",
-                    "image_os_type":"Windows"
+                    "image_name":"MM_MK_Test1",
+                    "image_os_type":"Windows",
+                    "location":"canadacentral"
                 }
             ]
           
